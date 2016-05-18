@@ -11,11 +11,11 @@ You have an excellent introduction to JWT in (https://jwt.io/introduction/) and 
 
 Define on page a `<meta>` field to indicate the sslsignature accountId
 ```
-<meta name="ssls.accountId" content="5995a3c9-678b-4338-a674-362af68b9ef9" />
+<meta name="ssls.accountId" content="jwtdemo" />
 ```
 Include javascript
 ```
-<script src="https://produccion.sslsignature.com/sslsignature/resources/js/sslssso.js"></script>
+<script src="https://produccion.sslsignature.com/sso/resources/js/sslssso.js"></script>
 ```
 Create a function to receive the authenticated user
 ```
@@ -25,5 +25,8 @@ function onIdentification(operation){
     console.log("jwt: "+ operation.jwt);
 }
 ```
-Identifícate aquí y comprueba que en tu página estás logueado, o bien accede a la página de demostración https://demo.aralink.com/sso
+Now, we are going to see it in action (download the demo for the third step)
+1. Create a JWT [here](https://desarrollo.sslsignature.com/sso/standalone/index.html). This would be done in your login form
+2. Open a new tab in your browser with [this URL](https://desarrollo.sslsignature.com/sso/standalone/index.html). You will see that you ar logged in and the content of the JWT token
+3. Now, here is the magic, open sso.html from the local demo, and you will see that you are registered with the same user
 
