@@ -1,0 +1,161 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>SSO SSLSignature</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+	<link rel="icon" href="img/favicon.ico">
+	
+	<meta name="ssls.accountId" content="5995a3c9-678b-4338-a674-362af68b9ef9" />
+	
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+
+ <body>
+ 	<div class="container">
+   		<div class="text-center pad-top ">
+   			<h2 id="siteTitle">SSO ID FORM</h2>
+   	 		<p id="siteDescription">Select ID method</p>
+   	 	</div>
+   	 	<div class="row pad-top">
+           	<div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">	
+                <hr/>
+                <button type="button" class="btn btn-default btn-block" aria-label="Left Align" onclick="loginByCert();" id="idByCert"><span><img  src="img/cert.png" alt="Identificación por certificado electrónico SSL"  height="20" class="pull-left"></span> ID por certificado (SSL)</button>
+                <button type="button" class="btn btn-default btn-block" aria-label="Left Align" onclick="loginByClave();" id="idByClave"><span><img  src="img/clave.gif" alt="Identificación por cl@ve"  height="20" class="pull-left"></span> ID por cl@ve</button>
+			 	
+			 	 <!-- WebCryptographyApi -->
+			 	<div class="btn-group btn-block" id="webcryptoListOn">
+          	  		<button type="button" class="btn btn-default col-lg-11" aria-label="Left Align" onclick="loginByWebCrypto();"><span><img  src="img/cert.png" alt="Identificación por certificado electrónico con WebCrypto"  height="20" class="pull-left"></span> ID por certificado (WebCrypto)</button>
+			  		<button type="button" class="btn btn-default dropdown-toggle col-lg-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			  	 		<span class="caret"></span>
+			     		<span class="sr-only">Toggle Dropdown</span>
+			  		</button>
+			  		<ul class="dropdown-menu" id="webcryptoList">
+			  		</ul>
+		  		</div> 
+		  		<!-- 
+		  		<div class="form-group has-error has-feedback" id="webcryptoOff">
+          			<button type="button" class="btn btn-default btn-block" aria-label="Left Align" disabled>
+          				<span><img  src="img/cert.png" alt="Identificación por certificado electrónico con WebCrypto"  height="20" class="pull-left"></span> 
+          				ID por certificado (WebCrypto)
+          			</button> 
+          			<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span> 
+          			<span id="webcryptoAlert" class="help-block" hidden></span> 
+          		
+          		</div>
+          		-->
+          		
+          		<button type="button" class="btn btn-default btn-block" aria-label="Left Align" id="webcryptoOff" data-toggle="tooltip" title="">
+         				<span><img  src="img/cert.png" alt="Identificación por certificado electrónico con WebCrypto"  height="20" class="pull-left"></span> 
+         				ID with digital certificate (WebCrypto)
+         				<span class="glyphicon glyphicon-warning-sign pull-right" aria-hidden="true"></span>
+       			</button> 
+        			
+			 	<!-- CryptoKeys -->
+			 	
+			 	<button id="cryptokeysOn" type="button" class="btn btn-default btn-block" aria-label="Left Align">
+			 		<span><img  src="img/cryptokeys.png" alt="Identificación por CryptoKey"  height="20" class="pull-left" ></span> 
+		        	 ID with CryptoKey
+		        </button>  
+			 	<div id="cryptokeysListOn" class="btn-group btn-block" >
+					  <button type="button" class="btn btn-default btn-block dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					  	<span><img  src="img/cryptokeys.png" alt="Identificación por CryptoKey"  height="20" class="pull-left"></span> ID with CryptoKey <span class="caret pull-right"></span>
+					  </button>
+					  <ul class="dropdown-menu" id="cryptokeysList">
+					  </ul>
+				</div>
+		        
+		       	      
+		        <button  id="cryptokeysOff" type="button" class="btn btn-default btn-block" aria-label="Left Align"   data-toggle="tooltip" title="opa">
+		        	<span><img  src="img/cryptokeys.png" alt="Identificación por CryptoKey"  height="20" class="pull-left" ></span> 
+		        	 ID with CryptoKey
+		        	 <span class="glyphicon glyphicon-warning-sign pull-right" aria-hidden="true"></span>  
+		        </button>
+		         
+		        <!-- Usuario y contraseña -->
+		        
+			 	<button type="button" class="btn btn-default btn-block" data-toggle="modal" data-target="#loginByUserPwd" id="idByPassword"> <span><img  src="img/pwd.png" alt="Identificación por usuario y contraseña"  height="20" class="pull-left"></span> ID por contraseña</button>
+			 	<hr/>
+			 	<a href="register.html" class="btn btn-success ">Register</a>
+			 	<a href="keystore.html" class="pull-right" >Manage Key Store</a>
+		 	</div>
+		 	 
+		</div>
+	</div>	
+	
+	<div class="modal fade" id="loginByUserPwd" tabindex="-1" role="dialog">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title">ID with username and password</h4>
+	      </div>
+	      <div class="modal-body">
+	        <p>Enter your CryptoKeys credentials. You have to be registered to use this service</p>
+			<div class="form-group">
+    			<label for="password">User</label>
+    			<input type="text" name="username" id="username" value="" placeholder ="username / email / private ID / phone" class="form-control">
+  			</div>
+			<div class="form-group">
+    			<label for="password">Password</label>
+    			<input type="password" name="password" id="password" value="" placeholder ="Password " class="form-control">
+  			</div>
+					
+				<!-- 
+			<div class="checkbox">
+			  <label>
+			    <input type="checkbox" id="extractable" name="extractable">
+			    Marcar la clave como exportable
+			  </label>
+			</div>	
+			 -->
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-primary" onclick="loginByUserPwd();">Identify</button>
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>	
+	
+	
+	
+	
+	 <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+ 	 <!--SSO--><script src="https://produccion.sslsignature.com/sslsignature/resources/js/sslssso.js"></script><!--SSO-->
+    <script src="https://produccion.sslsignature.com/sslsignature/resources/js/es6-promise.min.js"></script>
+    <script src="https://produccion.sslsignature.com/sslsignature/resources/js/forge.min.js"></script>
+    <script src="https://produccion.sslsignature.com/sslsignature/resources/js/ssls.min.js"></script>
+    <script src="js/login.js"></script>
+    <script src="js/config.js"></script>
+
+    <script>
+    	
+    	start (config);
+    	
+    	sslssso.listen("sso.onload", function(observable, eventType, data){
+	        console.log("----------------");
+	        console.log("sso.onload");
+	        console.log("----------------");
+	    });
+    	sslssso.listen("sso.onidentification", function(observable, eventType, data){
+	        console.log("----------------");
+	        console.log("sso.onidentification");
+	        console.log("----------------");
+	    });
+    </script>
+   
+</body>
+</html>

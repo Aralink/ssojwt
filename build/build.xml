@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="SSO SSLSignature GIT" default="" basedir=".." xmlns:ivy="antlib:org.apache.ivy.ant">
+    
+    <property name="version" value="1.0.0" />
+    <property name="builddir" value="${basedir}/build" />
+    <property name="buildlibdir" value="${basedir}/backend/build-lib" />
+	<property name="libdir" value="${builddir}/lib" />
+	<property name="compilation" value="${builddir}/bin" />
+	<property name="distdir" value="${basedir}/dist" />
+	
+	<property name="jssource" value="${basedir}/client" />
+	<property name="javasource" value="${basedir}/backend/src/java" />
+	<property name="websource" value="${basedir}/backend/src/web" />
+	<property name="testsource" value="${basedir}/test/web" />
+        
+	<property name="ivy.dep.file" value="${builddir}/ivy.xml" />
+	<target name="RESOLVE" description="retrieve dependencies with ivy" >
+		<ivy:retrieve pattern="${libdir}/[artifact].[ext]" />
+	</target>
+	
+	
+	
+	<target name="init">
+		<mkdir dir="${builddir}" />
+		<mkdir dir="${libdir}" />
+		<delete dir="${compilation}" />
+		<mkdir dir="${compilation}" />		
+	</target>
+	
+	<target name="backend" description="" depends="init">
+	    <path id="libraries">
+			<fileset dir="${libdir}" includes="*.jar" />	
+			<fileset dir="${buildlibdir}" includes="*.jar" />							
+		</path>
+	    <javac destdir="${compilation}" classpathref="libraries" source="1.5" target="1.5" debug="on" includeantruntime="true">
+			<src path="${javasource}" />
+		</javac>
+				
+		<war destfile="${builddir}/sso.war" webxml="${websource}/WEB-INF/web.xml" update="true">
+			<fileset dir="${jssource}" />
+		    <fileset dir="${websource}" />
+			<fileset dir="${testsource}" />			
+			<classes dir="${compilation}" />
+			<lib dir="${libdir}" includes="**" />
+		</war>
+	</target>
+	
+</project>

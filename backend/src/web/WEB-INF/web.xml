@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	id="WebApp_ID" version="2.5">
+  <display-name>SSLSIGNATURE {env.SVN_REVISION} </display-name>
+  <session-config>
+    <session-timeout>300</session-timeout>
+  </session-config>
+ 
+  <servlet>
+	<servlet-name>jwt</servlet-name>
+	<servlet-class>com.aralink.sslsignature.sso.jwt.JWTServlet</servlet-class>
+	<init-param>
+            <param-name>keyFile</param-name>
+            <param-value>jwt.hmac</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+	<servlet-name>jwt</servlet-name>
+	<url-pattern>/jwt</url-pattern>
+  </servlet-mapping>
+</web-app>

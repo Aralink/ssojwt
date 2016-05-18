@@ -1,0 +1,132 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>SSLSignature - JWT Creator</title>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+		
+		<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+		
+		<meta name="ssls.accountId" content="5995a3c9-678b-4338-a674-362af68b9ef9" />
+		<meta name="ssls.validate" content="false" />
+		 
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+	</head>
+	<body>
+
+		<!-- CTA -->
+		<div id="cta" class="container">
+			
+			<div class="text-center pad-top ">
+				<h2>JWT creator </h2>
+				<p>Set the fields, issue a new token, store in browser</hp>
+			</div>	
+ 			<div class="row  pad-top">
+               
+                <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
+                
+                        <div class="panel panel-default">
+                            
+                            <div class="panel-body">
+                                <form id="jwtForm" role="form" >
+                                	
+										<div id="identifiedUser" class="well well-sm"  hidden>JWT issued <a href="index.html">(view)</a></div>
+									<!-- 									<br/> -->
+                                        <div class="form-group input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"  ></i></span>
+                                            <input type="text" class="form-control" placeholder="User unique ID (sub)" id="sub"  value="123456"/>
+                                        </div>
+                                        <div class="form-group input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-credit-card"  ></i></span>
+                                            <input type="text" class="form-control" placeholder="Your unique identifier(eidentifier)" id="eidentifier"  value="john.smith"/>
+                                        </div>
+                                        <div class="form-group input-group">
+                                            <span class="input-group-addon">@</span>
+                                            <input type="text" class="form-control" placeholder="Full name (name)" id="name" value="John Smith"/>
+                                        </div>
+                                     	<div class="form-group input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"  ></i></span>
+                                            <input type="text" class="form-control" placeholder="Your phone number (phone)" id="phone" value="34 661661661"/>
+                                        </div>
+                                        <div class="form-group input-group">
+                                            <span class="input-group-addon">@</span>
+                                            <input type="text" class="form-control" placeholder="Your email (email)" id="email" value="john.smith@mycompany.com"/>
+                                        </div>
+                                        <div class="form-group input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-credit-card"  ></i></span>
+                                            <input type="text" class="form-control" placeholder="Other interesting field (other)" id="other" value="..."/>
+                                        </div>
+                                     
+                                     
+                                     <a href="javascript:handleCreateJWTClick()" class="btn btn-success ">Create JWT token</a>
+                                    </form>
+                            </div>
+                           
+                        </div>
+                    </div>
+                
+                
+        </div>
+	</div>
+		
+		
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <!--SSO--><script src="https://produccion.sslsignature.com/sslsignature/resources/js/sslssso.js"></script><!--SSO-->
+    <script src="js/config.js"></script>
+    
+    <script>
+    	    	
+    	function onIdentification(operation){
+    		console.log("SSO PAGE onIdentification event" );
+    		$('#identifiedUser').show();
+    		
+    	}
+    	function onLoad(){
+    		console.log("SSO PAGE onLoad event");
+    	}
+    	function onLogout(){
+    		console.log("SSO PAGE onLogout event");
+    		$('#identifiedUser').hide();
+    	}
+    	
+    	
+    	function handleCreateJWTClick(){
+    		var url = config.apiUrl + "/account/jwt";
+    		var params = {
+    			sub:	$('#sub').val(),
+    			eidentifier:	$('#eidentifier').val(),
+    			name:	$('#name').val(),
+    			phone:	$('#phone').val(),
+    			email:	$('#email').val(),
+    			other:	$('#other').val()
+    		}
+    		console.log("POST "+url);
+    		console.log(params);
+    		
+    		$.ajax({
+    			  type: "POST",
+    			  url: url,
+    			  data: JSON.stringify(params),
+    			  success: function(jwt) {
+  					console.log("JWT: "+jwt.JWT.data);
+					//Store JWT in browser SSO
+					sslssso.login(jwt.JWT.data);
+					$('#identifiedUser').show();
+                  },
+                  contentType: "application/json",
+    			  beforeSend: function (xhr) {
+    				var auth =  config.tokenType+" " + btoa(config.accountId + ':' + config.apiKey);
+  					xhr.setRequestHeader("Authorization", auth);
+  				  }
+			});
+    		
+    	}	
+    	
+    	
+    </script>
+	</body>
+</html>

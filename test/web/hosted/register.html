@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>SSLSignature - Cryptokeys</title>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+		
+		<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+		<link rel="icon" href="img/favicon.ico">
+		<meta name="ssls.accountId" content="5995a3c9-678b-4338-a674-362af68b9ef9" />
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+	</head>
+	<body>
+
+		<!-- CTA -->
+		<div id="cta" class="container">
+			
+			<div class="text-center pad-top ">
+				<h2>CryptoKeys Register</h2>
+			</div>	
+ 			<div class="row  pad-top">
+               
+                <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
+                
+                        <div class="panel panel-default">
+                            
+                            <div class="panel-body">
+                                <form role="form">
+                                	<div id="identifiedUser" class="alert alert-info well-sm" role="alert">User not identified</div>
+									<!-- 									<br/> -->
+                                        <div class="form-group input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"  ></i></span>
+                                            <input type="text" class="form-control" placeholder="Su nombre" id="usernameSignup"/>
+                                        </div>
+                                     	<div class="form-group input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"  ></i></span>
+                                            <input type="text" class="form-control" placeholder="Su teléfono (+34xxxxx)" id="phoneSignup"/>
+                                        </div>
+                                         <div class="form-group input-group">
+                                            <span class="input-group-addon">@</span>
+                                            <input type="text" class="form-control" placeholder="Su correo (email@server.es)" id="emailSignup"/>
+                                        </div>
+                                        <div class="form-group input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-credit-card"  ></i></span>
+                                            <input type="text" class="form-control" placeholder="Su NIF (12345678A)" id="nifSignup"/>
+                                        </div>
+                                      <div class="form-group input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"  ></i></span>
+                                            <input type="password" class="form-control" placeholder="Contraseña de recuperación" id="passwordSignup"/>
+                                        </div>
+                                     <div class="form-group input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"  ></i></span>
+                                            <input type="password" class="form-control" placeholder="Vuelva a introducir la contraseña" id="passwordSignup2"/>
+                                        </div>
+                                     
+                                     <a href="javascript:handleRegisterUserClick()" class="btn btn-success ">Register</a>
+                                    <hr />
+                                    ¿Ya registrado? <a href="login.html" >Identify</a>
+                                    </form>
+                            </div>
+                           
+                        </div>
+                    </div>
+                
+                
+        </div>
+	</div>
+		
+		
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<!--SSO--><script src="https://produccion.sslsignature.com/sslsignature/resources/js/sslssso.js"></script><!--SSO-->
+    <script src="https://produccion.sslsignature.com/sslsignature/resources/js/es6-promise.min.js"></script>
+    <script src="https://produccion.sslsignature.com/sslsignature/resources/js/forge.min.js"></script>
+    <script src="https://produccion.sslsignature.com/sslsignature/resources/js/ssls.min.js"></script>
+    <script src="js/register.js"></script>
+    <script src="js/config.js"></script>
+    <script>
+    	start (config);
+    	</script>
+	</body>
+</html>

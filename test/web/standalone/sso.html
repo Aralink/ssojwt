@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>SSLSignature Demo SSO</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="ssls.accountId" content="jwtdemo" />
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+		
+	</head>
+	<script>
+		//sslssso will connect this URL to validate JWT
+		//Use full URL because it will be invoked from user browser
+		ssls_validationUrl = document.location.origin+"/sso/jwt";
+	
+		// Fired after validating JWT on page onLoad process, or after a successful identification
+		function onIdentification(operation){
+			$( "#title" ).html("Welcome "+operation.name + "("+operation.eidentifier+")");
+			$( "#token" ).html("JWT");
+			
+			$( "#body" ).val(JSON.stringify(operation, null, '\t'));
+			$( "#body" ).show();
+		}
+		//Fired when sso is fully loaded
+		function onLoad(){
+		}
+		//Fired onLogout
+		function onLogout(){
+			console.log("[PAGE] logout");
+			$( "#title" ).html("Welcome!! ");
+			$( "#token" ).html("No identification token (JWT) available");
+			$( "#body" ).hide();
+		}
+	</script>
+		
+<body>
+
+	<div class="jumbotron">
+      <div class="container">
+        <h1>SSLSignature SingleSignOn Demo</h1>
+        <p>Multidomain Single Sign On with Json Web Token (JWT)</p>
+      </div>
+    </div>
+    
+    <section id="main">
+   	 	<div class="container">
+   	 		<h2 id="title">Welcome!!</h2>
+   	 		<p id="token">No identification token (JWT) available</p>
+ 	 			<textarea  id="body" rows=10 disabled class="form-control" style="min-width: 100%"></textarea>
+   	 		
+			<hr/>
+			 <a type="button" class="btn btn-primary" aria-label="Left Align" href="index.html">Identify</a>
+			 <button type="button" class="btn btn-danger" aria-label="Left Align" onclick="sslssso.logout();"><span class="glyphicon glyphicon-off" aria-hidden="true"></span> Logout</button>
+		</div>
+	</section>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="../resources/js/sslssso.js"></script>
+   
+	
+</body>
+</html>

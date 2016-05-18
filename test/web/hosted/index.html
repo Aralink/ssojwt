@@ -1,0 +1,179 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>SSLSignature - CryptoKeys</title>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+		<link rel="icon" href="img/favicon.ico">
+		<meta name="ssls.accountId" content="5995a3c9-678b-4338-a674-362af68b9ef9" />
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+		
+		
+	</head>
+	<body>
+		<div id="notIdentified" class="container" hidden>
+			<h2>Welcome</h2>
+			<p>You do not have an authentication token</p>
+			<a type="button" class="btn btn-success" aria-label="Left Align" href="register.html"> Register </a>
+			<a type="button" class="btn btn-default" aria-label="Left Align" href="login.html"> Identify</a>
+		</div>	
+		
+		<div id="identified" class="container" hidden>
+			<h2 id="identifiedTitle">Identificación realizada</h2>
+			<section id="identificationInfo" ></section>
+			<div id="idOk" class="row">
+				<hr/>
+				<p>User not registered in CryptoKeys</p>
+				<a type="button" class="btn btn-success" aria-label="Left Align" href="register.html">  Register  </a>
+				<button type="button" class="btn btn-danger" aria-label="Left Align" onclick="handleLogoutClick();"><span class="glyphicon glyphicon-off" aria-hidden="true"></span> Logout</button>
+			</div>
+			<div id="idFailed" class="row">
+				<hr/>
+				<p>You do not have an authentication token</p>
+				<a type="button" class="btn btn-success" aria-label="Left Align" href="register.html">  Register  </a>
+				<a type="button" class="btn btn-default" aria-label="Left Align" href="login.html"> Identify</a>
+			</div>
+		</div>	
+		
+		
+		<section id="logged" hidden>
+			<div class="container" >
+				<h2 id="pageTitle">Identification performed</h2>
+				<button type="button" class="btn btn-danger" aria-label="Left Align" onclick="handleLogoutClick();"><span class="glyphicon glyphicon-off" aria-hidden="true"></span> Logout</button>
+			</div>
+				
+			<div  id = "newDevice" class="container" hidden>
+				<h3>CryptoKeys not enabled</h3>
+				<p>It is the first time you connect with this device, to enable CryptoKeys an additional identification is required. Below you will create your security private key </p>
+				<section id="newDeviceSend" hidden>
+					<p>Enter the 4-digit code that is sent to your mobile phone</p>
+					<div class='row'>
+						<div class='col-md-2'>
+							<div class="form-group input-group">
+                            	<span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"  ></i></span>
+                            	<input type="text" name="otp" id="otp" value=""  class="form-control" placeholder="OTP" />
+	                        </div>
+	                    </div>    
+	                    <div class='col-md-1'>
+	                    	<button type="button" id="sendOtp" class="btn btn-primary" aria-label="Left Align" onclick="handleEnrollClick()"> Send </button>
+						</div>										
+					</div>	
+				</section>
+				<section id="newDeviceError" hidden>
+				 	<div id="newDeviceErrorMessage" class="alert alert-warning" role="alert">Invalid identification</div>
+					<a href="javascript:handleResendClick()" id="resendOtp" class="btn btn-primary" >Enable CryptoKeys</a>
+				</section>
+			</div>
+			
+			<div id ="registeredDevice" class="container" hidden>
+				<hr/>
+				<h3>Device registered</h3>
+				<p>Your current browser has a security key. </p>
+				<table id="theDeviceList" class="table table-striped">
+					<thead>
+						<tr>
+							<th><a href="javascript:handleRefreshDevicesClick()"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Dispositivos habilitados</a></th>
+							
+							<th>Private</th>
+							<th>Type</th>
+							<th>Enabled</th>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+				
+				
+				<div class="checkbox">
+				    <label>
+				      <input type="checkbox" id="showOnlyActive" name="showOnlyActive" checked> Show only enabled keys
+				    </label>
+				 </div>
+				<div class="row">
+					<section id="checkRegisterMessage"></section>
+				</div>
+				<hr/>
+				<h3>Link mobile</h3>
+				<p>You can link mobile devices to perform operations with double safety factor. Download the app (android) first</p>
+				<p>
+					<a href="javascript:handleRegisterDeviceClick()" id="registerDeviceKey" class="btn btn-success" >Link</a>
+					<span class="image"> <a href="javascript:handleDownloadAppClick()"><img src="img/android2.png" height="32" alt="Download app"/></a></span>
+				</p>
+			</div>
+			<div id="dialogQr"></div>
+			
+			<div class="container" id = "signedTransaction" hidden>
+				<hr/>
+				<h3>Use your key on a transaction</h3>
+				<p>The transaction is signed with your private key and validated by the public. Only an authorized device can perform operations. In operations with double safety factor you will need a connected mobile device. An authorization request will be sent to the device</p>
+				<section id="checkResultMessage"></section>
+								
+				<p>
+					<a href="javascript:handleExecuteSignedTransactionClick()" id="sendTransaction" class="btn btn-primary" >Level 1 : WebCrypto</a>
+					<a href="javascript:handleExecuteSignedTransactionDoubleFactorClick()" id="sendTransactionDoubleFactor" class="btn btn-primary" >Level 2: Double Factor</a>
+					<a href="javascript:handleAbortClick()" id="abortButton" class="btn btn-danger" hidden>Abort</a>
+				</p>
+				
+			</div>					
+			
+		</section>
+		
+		<div class="modal fade" id="downloadAndroidDialog" tabindex="-1" role="dialog">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title">Download for Android</h4>
+		      </div>
+		      <div class="modal-body">
+		        <p>Scan QR with your device</p>
+		        <img src="#" width="500" id="qrimage"  alt="Descargar aplicación">
+				
+		      </div>
+		      <div class="modal-footer">
+		        
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		<div class="modal fade" id="registerDeviceDialog" tabindex="-1" role="dialog">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title">Register new device</h4>
+		      </div>
+		      <div class="modal-body">
+		        <p>Scan QR with your device</p>
+		        <img src="#" width="500" id="qrdevice"  alt="Vincular dispositivo">
+				
+		      </div>
+		      <div class="modal-footer">
+		        
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+   		 <!--SSO--><script src="https://produccion.sslsignature.com/sslsignature/resources/js/sslssso.js"></script><!--SSO-->
+	    <script src="https://produccion.sslsignature.com/sslsignature/resources/js/es6-promise.min.js"></script>
+	    <script src="https://produccion.sslsignature.com/sslsignature/resources/js/forge.min.js"></script>
+	    <script src="https://produccion.sslsignature.com/sslsignature/resources/js/ssls.min.js"></script>
+	    <script src="js/index.js"></script>
+	    <script src="js/config.js"></script>
+	    <script>
+	    	start (config);
+    	</script>
+	</body>
+</html>
