@@ -2,6 +2,8 @@
 > Federate your websites using only javascript
 
 Access to several web sites with a unique identification. Uses JSON Web Tokens (RFC7519) to represent the information exchanged between the identification provider (IDP) and service provider (SP). The JWT is shared and synchronized among all your websites through the browser local storage without need of server session
+![alt tag](https://desarrollo.sslsignature.com/web/images/ssoiframe.png)
+![Alt text](https://desarrollo.sslsignature.com/web/images/ssoiframe.png "Optional title")
 
 ## How does it work
 You have an excellent introduction to JWT in (https://jwt.io/introduction/) and use in a single sign-on on our website (spanish) (https://produccion.sslsignature.com/web/sso.html)
