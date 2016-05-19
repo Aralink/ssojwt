@@ -164,7 +164,7 @@ On hosted version, use the provided accountId and do not set the validationUrl
 
 ### Login
 In a standard authentication flow, when an identification is required, the website redirects the user to the IDP (identification provider). The IDP authenticates user with the organization defined method, for example, and username/password form. After successful authentication, the IDP server returns a valid JWT that includes the identification information and the electronic signature. The JWT is stored locally on the browser
-![alt tag](https://desarrollo.sslsignature.com/web/images/ssoflow.png)
+![alt tag](https://produccion.sslsignature.com/web/images/ssoflow.png)
 
 ```
 sslssso.login(jwt);
