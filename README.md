@@ -2,8 +2,8 @@
 > Federate your websites using only javascript
 
 Access to several web sites with a unique identification. Uses JSON Web Tokens (RFC7519) to represent the information exchanged between the identification provider (IDP) and service provider (SP). The JWT is shared and synchronized among all your websites through the browser local storage without need of server session
-![alt tag](https://desarrollo.sslsignature.com/web/images/ssoiframe.png)
-![Alt text](https://desarrollo.sslsignature.com/web/images/ssoiframe.png "Optional title")
+![alt tag](https://produccion.sslsignature.com/web/images/ssoiframe.png)
+
 
 ## How does it work
 You have an excellent introduction to JWT in (https://jwt.io/introduction/) and single sign-on (SSO) on our website (spanish) (https://produccion.sslsignature.com/web/sso.html)
@@ -163,11 +163,13 @@ Validation URL is configured with `<meta name="ssls.validationUrl">` (see server
 On hosted version, use the provided accountId and do not set the validationUrl
 
 ### Login
-In a standard authentication flow, when an identification is required, the website redirects the user to the IDP (identification provider). The IDP authenticates user with the organization defined method, for example, and user/password form. After successful authentication, the IDP server must return a valid JWT that includes the identification information and the electronic signature. The JWT will be stored locally on the SingleSignOn
+In a standard authentication flow, when an identification is required, the website redirects the user to the IDP (identification provider). The IDP authenticates user with the organization defined method, for example, and username/password form. After successful authentication, the IDP server returns a valid JWT that includes the identification information and the electronic signature. The JWT is stored locally on the browser
+![alt tag](https://desarrollo.sslsignature.com/web/images/ssoflow.png)
+
 ```
 sslssso.login(jwt);
 ```
-An `onIdentification` event will be fired on all tabs
+Calls SSO to store the jwt issued token on localStorage of browser. An `onIdentification` event will be fired on all tabs
 
 ### Logout
 ```
