@@ -66,7 +66,15 @@ jwt={jwt}
 ```
 The answer must have code 200, status = FAILED / SUCCESS, and the JWT parsed fields in JSON format
 ```
-{"status":"SUCCESS","name":"theName","eidentifier":"theEidentifier"}
+{
+    "status": "SUCCESS",       //SUCCESS, FAIL. Mandatory
+    "sub": "123456",            //User unique identifier. Recommended
+    "eidentifier":"john.smith"  //username,Recommended
+    "name": "John Smith",       //User Full Name. Recommended
+    "other": "value",           //More fields (email, phone, etc). Optional
+    "jwt": "eyJhbGciOiJIUzI..."  //JWT new token if necessary. Optional
+}
+
 ```
 
 
@@ -122,16 +130,17 @@ Configure the accountId and custom validation URL in the <meta> tags of the page
 var ssls_accountId=myTokenId;
 var ssls_validationUrl={yourserver.com}/{ssoValidationUri};
 ```
-If you do not want the tokens are validated on the client side, set `validate = false` (default is true). Then no server configuration is needed, and sslssso.js only will decode jwt token and check expiration on the client side.
-
-On hosted version, use the provided accountId and do not set the validationUrl
 
 ### SSO Events
-The sso generates events onload, onIdentification and onLogout. Simply create a function on the page with these names.
+The sso generates events for onload, onIdentification and onLogout. Simply create a function on the page with these names.
 ```
 // Invoked after page load if you have a valid token or after new JWT correct identification (if page is still loaded)
 // If you do not have identification token, this function is not executed
 function onIdentification(operation){
+    console.log(operation.sub);  //Your User internal ID
+    console.log(operation.eidentifier);  //Your user unique identifier (for example the username)
+    console.log(operation.name); //User full name
+    console.log("operation.jwt);  //The token itself
 }
 //Invoked when  the script finish loading the SSO. It is always after onIdentification
 function onLoad(){
@@ -144,3 +153,23 @@ In you need several event listeners use
 ```
 sslssso.listen ("sso.onload", function (observable, eventType, data) {});
 ```
+### JWT Validation
+The token is validated during script execution to check that has been issued by the server and has not been altered. The electronic signature is verified cryptographically on the server. If the token is correct will occur a call to onIdentification. If the validation is unsuccessful, the token is deleted and acts as if there had been token.
+
+Validation URL is configured with `<meta name="ssls.validationUrl">` (see server instalation). If you do not want the tokens are validated on the client side, set `validate = false` (default is true). Then no server configuration is needed, and `sslssso.js` only will decode jwt token and check expiration on the client side.
+
+On hosted version, use the provided accountId and do not set the validationUrl
+
+### Login
+In a standard authentication flow, when an identification is required, the website redirects the user to the IDP (identification provider). The IDP authenticates user with the organization defined method, for example, and user/password form. After successful authentication, the IDP server must return a valid JWT that includes the identification information and the electronic signature. The JWT will be stored locally on the SingleSignOn
+```
+sslssso.login(jwt);
+```
+An `onIdentification` event will be fired on all tabs
+
+### Logout
+```
+sslssso.logout();
+```
+The token will be cleaned and an `onLogout` event will be fired on all tabs
+
