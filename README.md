@@ -6,7 +6,7 @@ Access to several web sites with a unique identification. Uses JSON Web Tokens (
 ![Alt text](https://desarrollo.sslsignature.com/web/images/ssoiframe.png "Optional title")
 
 ## How does it work
-You have an excellent introduction to JWT in (https://jwt.io/introduction/) and use in a single sign-on on our website (spanish) (https://produccion.sslsignature.com/web/sso.html)
+You have an excellent introduction to JWT in (https://jwt.io/introduction/) and single sign-on (SSO) on our website (spanish) (https://produccion.sslsignature.com/web/sso.html)
 
 ## Getting started
 > With hosted version (it is free)
