@@ -1,4 +1,4 @@
-# Multidomain Single sign-on with Json Web Tokens (JWT)
+# Cross domain Single sign-on with Json Web Tokens (JWT)
 > Federate your websites using only javascript
 
 Access to several web sites with a unique identification. Uses JSON Web Tokens (RFC7519) to represent the information exchanged between the identification provider (IDP) and service provider (SP). The JWT is shared and synchronized among all your websites through the browser local storage without need of server session
