@@ -30,8 +30,8 @@ function onIdentification(operation){
 ```
 Now, we are going to see it in action (download the demo for the third step)
 
-1. Create a JWT [here](https://desarrollo.sslsignature.com/sso/hosted/jwtcreator.html). This would be done in your login form
-2. Open a new tab in your browser with [this URL](https://desarrollo.sslsignature.com/sso/hosted/sso.html). You will see that you are logged in and the content of the JWT token
+1. Create a JWT [here](https://produccion.sslsignature.com/sso/hosted/jwtcreator.html). This would be done in your login form
+2. Open a new tab in your browser with [this URL](https://produccion.sslsignature.com/sso/hosted/sso.html). You will see that you are logged in and the content of the JWT token
 3. Now, here is the magic, download [sso.html](/test/web/hosted/sso.html) and open from your computer, and you will see that you are registered with the same user. Try to logout and see the opened page in second step (do not use IE11 at this moment, please...)
 
 ##Install
