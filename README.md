@@ -180,5 +180,9 @@ sslssso.logout();
 The token will be cleaned and an `onLogout` event will be fired on all tabs
 
 ##Known issues
-##IE11 & Edge
+###IE11 & Edge
 JWT update events do not syncronize tabs. See [Microsoft doc](https://connect.microsoft.com/IE/feedback/details/812563/ie-11-local-storage-synchronization-issues)
+
+## Support
+https://soporte.aralink.com
+https://github.com/Aralink/ssojwt/issues
