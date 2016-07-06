@@ -181,7 +181,7 @@ The token will be cleaned and an `onLogout` event will be fired on all tabs
 
 ##Known issues
 ###IE11 & Edge
-JWT update events do not syncronize tabs. See [Microsoft doc](https://connect.microsoft.com/IE/feedback/details/812563/ie-11-local-storage-synchronization-issues)
+JWT update events do not syncronize tabs. See [Microsoft doc](https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/110656/)
 
 ## Support
 https://soporte.aralink.com
